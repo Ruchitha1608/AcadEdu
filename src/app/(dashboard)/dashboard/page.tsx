@@ -1,5 +1,5 @@
 'use client';
-import { useMemo } from 'react';
+import { useMemo, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { useStudents } from '@/hooks/useStudents';
 import Card from '@/components/ui/Card';
@@ -7,6 +7,8 @@ import Avatar from '@/components/ui/Avatar';
 import { cgpaBadgeColor } from '@/constants/gradePoints';
 import { buildCGPATrend } from '@/lib/chartTransformers';
 import CGPATrendChart from '@/components/charts/CGPATrendChart';
+import { DEMO_STUDENTS } from '@/lib/demoData';
+import { setStudents } from '@/lib/storage';
 
 function StatCard({ label, value, sub, color }: { label: string; value: string | number; sub?: string; color: string }) {
   return (
@@ -19,7 +21,25 @@ function StatCard({ label, value, sub, color }: { label: string; value: string |
 }
 
 export default function DashboardPage() {
-  const { students } = useStudents();
+  const { students, refresh } = useStudents();
+  const [demoLoaded, setDemoLoaded] = useState(false);
+
+  const loadDemo = useCallback(() => {
+    // Merge: keep existing non-demo students, replace demo ones fresh
+    const existing = students.filter((s) => !s.id.startsWith('demo-student-'));
+    setStudents([...existing, ...DEMO_STUDENTS]);
+    refresh();
+    setDemoLoaded(true);
+  }, [students, refresh]);
+
+  const clearDemo = useCallback(() => {
+    const existing = students.filter((s) => !s.id.startsWith('demo-student-'));
+    setStudents(existing);
+    refresh();
+    setDemoLoaded(false);
+  }, [students, refresh]);
+
+  const hasDemoLoaded = students.some((s) => s.id.startsWith('demo-student-'));
 
   const stats = useMemo(() => {
     if (!students.length) return null;
@@ -39,6 +59,38 @@ export default function DashboardPage() {
 
   return (
     <div className="max-w-7xl mx-auto space-y-6">
+
+      {/* Demo Banner */}
+      {!hasDemoLoaded ? (
+        <div className="flex items-center justify-between bg-indigo-50 border border-indigo-100 rounded-2xl px-5 py-4">
+          <div>
+            <p className="text-sm font-semibold text-indigo-800">Try with demo data</p>
+            <p className="text-xs text-indigo-500 mt-0.5">
+              3 students · Arjun Sharma (CSE, CGPA 8.87), Priya Nair (ECE, 7.65), Ravi Kumar (IT, 6.42)
+            </p>
+          </div>
+          <button
+            onClick={loadDemo}
+            className="ml-4 shrink-0 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-xl hover:bg-indigo-700 transition-colors"
+          >
+            Load Demo Data
+          </button>
+        </div>
+      ) : (
+        <div className="flex items-center justify-between bg-emerald-50 border border-emerald-100 rounded-2xl px-5 py-4">
+          <p className="text-sm font-medium text-emerald-700">
+            Demo data loaded — Arjun, Priya &amp; Ravi are ready to explore
+          </p>
+          <button
+            onClick={clearDemo}
+            className="ml-4 shrink-0 px-4 py-2 bg-white border border-emerald-200 text-emerald-700 text-sm font-medium rounded-xl hover:bg-emerald-50 transition-colors"
+          >
+            Clear Demo
+          </button>
+        </div>
+      )}
+      {demoLoaded && !hasDemoLoaded && null /* reset local flag after clear */}
+
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard label="Total Students" value={students.length} sub="tracked profiles" color="bg-indigo-50 border-indigo-100 text-indigo-700" />

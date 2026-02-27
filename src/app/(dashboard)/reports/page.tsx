@@ -34,7 +34,8 @@ export default function ReportsPage() {
       const { downloadStudentReport } = await import('@/lib/reportGenerator');
       await downloadStudentReport('acadpulse-report', student.name);
     } catch (err) {
-      alert('PDF generation failed. Try using browser Print (Ctrl+P) instead.');
+      const msg = err instanceof Error ? err.message : 'Unknown error';
+      alert(`Could not open print window: ${msg}\n\nTip: Allow popups for this site, or use Ctrl+P to print manually.`);
     } finally {
       setDownloading(false);
     }
@@ -68,7 +69,7 @@ export default function ReportsPage() {
               </svg>
             }
           >
-            Download PDF
+            Print / Save PDF
           </Button>
         </div>
       </Card>

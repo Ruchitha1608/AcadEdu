@@ -14,6 +14,7 @@ import SubjectBarChart from '@/components/charts/SubjectBarChart';
 import SkillRadarChart from '@/components/charts/SkillRadarChart';
 import GradeDistributionPie from '@/components/charts/GradeDistributionPie';
 import AttendanceHeatmap from '@/components/charts/AttendanceHeatmap';
+import SubjectBubbleChart from '@/components/charts/SubjectBubbleChart';
 import AIInsightsPanel from '@/components/student/AIInsightsPanel';
 import {
   buildCGPATrend, buildSubjectBar, buildRadarData,
@@ -135,6 +136,10 @@ export default function StudentProfilePage() {
             <div className="space-y-5">
               <Card title={`Semester ${currentSem.semesterNumber} — Subject Grade Comparison`} subtitle={`SGPA: ${currentSem.sgpa.toFixed(2)} | Subjects: ${currentSem.subjects.length}`}>
                 <SubjectBarChart data={buildSubjectBar(currentSem)} height={280} />
+              </Card>
+
+              <Card title="Attendance vs Grade Point" subtitle="Bubble size = credits · Red zone = at-risk subjects · D3.js">
+                <SubjectBubbleChart subjects={currentSem.subjects} height={360} />
               </Card>
 
               <Card title="Skill Strength Radar" subtitle="Subject category performance">
