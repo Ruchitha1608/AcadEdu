@@ -60,64 +60,64 @@
 > 1. `npm run dev` → open `http://localhost:3000`
 > 2. Click **Load Demo Data** on the dashboard
 > 3. Take screenshots (`Cmd+Shift+4` on Mac · `Win+Shift+S` on Windows)
-> 4. Save files to `public/screenshots/` with the names below
+> 4. Save files to `public/screenshots/` with the exact names shown below
 
 ### 🔐 Login
-![Login](public/screenshots/01-login.png)
+![Login](public/screenshots/login.png)
 > Clean sign-in screen · SHA-256 password hashing · 7-day auto-expiring sessions · Default credentials shown on screen
 
 ---
 
 ### 🏠 Dashboard
-![Dashboard](public/screenshots/02-dashboard.png)
+![Dashboard](public/screenshots/dashboard.png)
 > At-a-glance stats: Total students · Average CGPA · Top performer · Low-attendance count · Mini trend charts · Load Demo Data banner
 
 ---
 
 ### 👤 Student Profile — Overview
-![Profile Overview](public/screenshots/03-profile-overview.png)
+![Profile Overview](public/screenshots/profile-overview.png)
 > CGPA + SGPA line chart with predicted next-semester point (dashed) · Grade distribution pie · Full semester summary table
 
 ---
 
 ### 🫧 D3.js Bubble Chart — Attendance vs Grade Point
-![Bubble Chart](public/screenshots/04-bubble-chart.png)
+![Bubble Chart](public/screenshots/bubble-chart.png)
 > **D3.js animated bubble chart** — X = attendance %, Y = grade point, size = credits · Red shaded danger zone (low att + low grade) · Dashed reference lines at 75% and GP 7.0 · Hover tooltip with full subject details
 
 ---
 
 ### 📚 Academics — Bar Chart + Radar
-![Academics](public/screenshots/05-academics.png)
+![Academics](public/screenshots/academics.png)
 > Recharts subject grade comparison bar (color-coded by grade band) · Chart.js skill strength radar across 6 categories: Mathematics, Programming, Systems, Design, Communication, Lab
 
 ---
 
 ### 📅 Attendance Heatmap
-![Attendance](public/screenshots/06-attendance.png)
+![Attendance](public/screenshots/attendance.png)
 > Plotly.js monthly attendance heatmap (red < 75% · yellow 75–85% · green > 85%) · Avg / Best / Worst semester stat boxes · Per-semester progress bars
 
 ---
 
 ### 🤖 AI Insights — ML Prediction Panel
-![AI Insights](public/screenshots/07-ai-insights.png)
+![AI Insights](public/screenshots/ai-insights.png)
 > Predicted next SGPA & CGPA · ML model badge (Random Forest + Polynomial + EWMA) · Individual model predictions side-by-side · Consistency score /100 with progress bar · Focus areas chips · Strengths checklist · Warnings alert list
 
 ---
 
 ### 📊 Analytics
-![Analytics](public/screenshots/08-analytics.png)
+![Analytics](public/screenshots/analytics.png)
 > Department-wise avg CGPA bar chart · Overall grade distribution pie · CGPA range histogram · Attendance bucket breakdown · Top performers leaderboard (clickable)
 
 ---
 
 ### ⚖️ Compare Students
-![Compare](public/screenshots/09-compare.png)
+![Compare](public/screenshots/compare.png)
 > Select 2–3 students → Grouped metrics bar chart · CGPA trend lines stacked · Overlapping skill radar · Detailed comparison table (CGPA · SGPA · Attendance · Backlogs · Consistency · Predicted CGPA)
 
 ---
 
 ### 📄 Report & PDF Export
-![Report](public/screenshots/10-report.png)
+![Report](public/screenshots/report.png)
 > Full printable report: cover with CGPA badge, quick stats, CGPA chart, semester table, subject chart, radar, pie, AI insights section · "Print / Save PDF" triggers native browser print dialog
 
 ---
