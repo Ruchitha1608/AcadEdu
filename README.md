@@ -56,12 +56,6 @@
 
 ## Screenshots
 
-> **How to capture screenshots:**
-> 1. `npm run dev` → open `http://localhost:3000`
-> 2. Click **Load Demo Data** on the dashboard
-> 3. Take screenshots (`Cmd+Shift+4` on Mac · `Win+Shift+S` on Windows)
-> 4. Save files to `public/screenshots/` with the exact names shown below
-
 ### 🔐 Login
 ![Login](public/screenshots/login.png)
 > Clean sign-in screen · SHA-256 password hashing · 7-day auto-expiring sessions · Default credentials shown on screen
@@ -70,55 +64,55 @@
 
 ### 🏠 Dashboard
 ![Dashboard](public/screenshots/dashboard.png)
-> At-a-glance stats: Total students · Average CGPA · Top performer · Low-attendance count · Mini trend charts · Load Demo Data banner
+> At-a-glance stats: 3 students · Average CGPA 7.65 · Top performer Arjun · Low attendance count · Mini CGPA trend charts · Demo data loaded banner
+
+---
+
+### 👥 Students List
+![Students](public/screenshots/students.png)
+> All student cards with CGPA badge, attendance %, semester, consistency score · Search + filter bar · Add Student button
 
 ---
 
 ### 👤 Student Profile — Overview
 ![Profile Overview](public/screenshots/profile-overview.png)
-> CGPA + SGPA line chart with predicted next-semester point (dashed) · Grade distribution pie · Full semester summary table
-
----
-
-### 🫧 D3.js Bubble Chart — Attendance vs Grade Point
-![Bubble Chart](public/screenshots/bubble-chart.png)
-> **D3.js animated bubble chart** — X = attendance %, Y = grade point, size = credits · Red shaded danger zone (low att + low grade) · Dashed reference lines at 75% and GP 7.0 · Hover tooltip with full subject details
-
----
-
-### 📚 Academics — Bar Chart + Radar
-![Academics](public/screenshots/academics.png)
-> Recharts subject grade comparison bar (color-coded by grade band) · Chart.js skill strength radar across 6 categories: Mathematics, Programming, Systems, Design, Communication, Lab
-
----
-
-### 📅 Attendance Heatmap
-![Attendance](public/screenshots/attendance.png)
-> Plotly.js monthly attendance heatmap (red < 75% · yellow 75–85% · green > 85%) · Avg / Best / Worst semester stat boxes · Per-semester progress bars
+> CGPA + SGPA line chart (Sem 1–5 with Sem 6 predicted dashed) · Grade distribution pie (32 subjects) · Full semester summary table with attendance color-coding
 
 ---
 
 ### 🤖 AI Insights — ML Prediction Panel
 ![AI Insights](public/screenshots/ai-insights.png)
-> Predicted next SGPA & CGPA · ML model badge (Random Forest + Polynomial + EWMA) · Individual model predictions side-by-side · Consistency score /100 with progress bar · Focus areas chips · Strengths checklist · Warnings alert list
+> Priya Nair: Predicted SGPA 8.46 · Predicted CGPA 7.79 · Poly + EWMA model breakdown · Consistency 78/100 (Good) · Focus areas: Engineering Chemistry, Microprocessors, Control Systems · Strengths
 
 ---
 
-### 📊 Analytics
+### 📊 Analytics — Department & Grade Overview
 ![Analytics](public/screenshots/analytics.png)
-> Department-wise avg CGPA bar chart · Overall grade distribution pie · CGPA range histogram · Attendance bucket breakdown · Top performers leaderboard (clickable)
+> Department-wise avg CGPA horizontal bar chart · Overall grade distribution donut chart (97 subjects combined across all students)
 
 ---
 
-### ⚖️ Compare Students
+### 🏆 Analytics — Distribution & Leaderboard
+![Analytics Leaderboard](public/screenshots/analytics-leaderboard.png)
+> CGPA distribution histogram · Attendance distribution by bucket · Top Performers leaderboard: Arjun 8.87 · Priya 7.65 · Ravi 6.42
+
+---
+
+### ⚖️ Compare — Metric Comparison
 ![Compare](public/screenshots/compare.png)
-> Select 2–3 students → Grouped metrics bar chart · CGPA trend lines stacked · Overlapping skill radar · Detailed comparison table (CGPA · SGPA · Attendance · Backlogs · Consistency · Predicted CGPA)
+> Arjun vs Priya selected · Profile header cards with CGPA · Grouped metric bar chart: Current CGPA, Attendance %, Backlogs, Consistency side-by-side with tooltip
+
+---
+
+### 🕸️ Compare — Skill Radar & Detailed Table
+![Compare Radar](public/screenshots/compare-radar.png)
+> Overlapping radar chart (Priya in blue vs Arjun in orange) across 6 skill categories · Detailed comparison table: Best/Worst SGPA · Avg Attendance · Total Credits · Predicted CGPA
 
 ---
 
 ### 📄 Report & PDF Export
 ![Report](public/screenshots/report.png)
-> Full printable report: cover with CGPA badge, quick stats, CGPA chart, semester table, subject chart, radar, pie, AI insights section · "Print / Save PDF" triggers native browser print dialog
+> Full printable report: CGPA trend chart · Semester summary table · Subject performance bar chart · Grade distribution pie · Skill strength radar · "Print / Save PDF" triggers browser print dialog
 
 ---
 
