@@ -33,7 +33,7 @@
   3. Uncomment ONE of the options below and replace the ID
 
   OPTION A — YouTube:
-  [![AcadPulse Demo](https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
+  [![AcadPulse Demo](https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg)]([https://www.youtube.com/watch?v=YOUR_VIDEO_ID](https://youtu.be/0_5pEdkNOS0))
 
   OPTION B — Loom:
   [![AcadPulse Demo](https://cdn.loom.com/sessions/thumbnails/YOUR_LOOM_ID-with-play.gif)](https://www.loom.com/share/YOUR_LOOM_ID)
