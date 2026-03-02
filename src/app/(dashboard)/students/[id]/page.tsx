@@ -15,10 +15,11 @@ import SkillRadarChart from '@/components/charts/SkillRadarChart';
 import GradeDistributionPie from '@/components/charts/GradeDistributionPie';
 import AttendanceHeatmap from '@/components/charts/AttendanceHeatmap';
 import SubjectBubbleChart from '@/components/charts/SubjectBubbleChart';
+import SubjectImpactChart from '@/components/charts/SubjectImpactChart';
 import AIInsightsPanel from '@/components/student/AIInsightsPanel';
 import {
   buildCGPATrend, buildSubjectBar, buildRadarData,
-  buildGradeDistribution, buildAttendanceHeatmap,
+  buildGradeDistribution, buildAttendanceHeatmap, calculateSubjectImpact,
 } from '@/lib/chartTransformers';
 import { cgpaBadgeColor } from '@/constants/gradePoints';
 
@@ -137,6 +138,28 @@ export default function StudentProfilePage() {
               <Card title={`Semester ${currentSem.semesterNumber} — Subject Grade Comparison`} subtitle={`SGPA: ${currentSem.sgpa.toFixed(2)} | Subjects: ${currentSem.subjects.length}`}>
                 <SubjectBarChart data={buildSubjectBar(currentSem)} height={280} />
               </Card>
+
+              {(() => {
+                const impact = calculateSubjectImpact(sorted, selectedSemIdx);
+                const prevSem = selectedSemIdx > 0 ? sorted[selectedSemIdx - 1] : null;
+                return (
+                  <Card
+                    title="Subject Impact Analysis"
+                    subtitle={impact.isFirstSemester ? 'How each subject affected SGPA vs your average' : `How each subject affected SGPA vs Sem ${sorted[selectedSemIdx - 1].semesterNumber}`}
+                  >
+                    <SubjectImpactChart
+                      impacts={impact.impacts}
+                      sgpaDelta={impact.sgpaDelta}
+                      cgpaDelta={impact.cgpaDelta}
+                      baseline={impact.baseline}
+                      currentSGPA={currentSem.sgpa}
+                      currentCGPA={currentSem.cgpaAfterSemester}
+                      prevCGPA={prevSem ? prevSem.cgpaAfterSemester : currentSem.cgpaAfterSemester}
+                      isFirstSemester={impact.isFirstSemester}
+                    />
+                  </Card>
+                );
+              })()}
 
               <Card title="Attendance vs Grade Point" subtitle="Bubble size = credits · Red zone = at-risk subjects · D3.js">
                 <SubjectBubbleChart subjects={currentSem.subjects} height={360} />

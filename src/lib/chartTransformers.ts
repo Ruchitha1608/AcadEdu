@@ -1,4 +1,4 @@
-import { Student, Semester } from '@/types/student';
+import { Student, Semester, SubjectImpact } from '@/types/student';
 import { CGPATrendDataPoint, SubjectBarDataPoint, RadarDataPoint, HeatmapCell } from '@/types/chart';
 import { predictNextSemester } from './predictions';
 
@@ -115,6 +115,40 @@ export function buildAttendanceHeatmap(semesters: Semester[]): HeatmapCell[] {
   }
 
   return cells;
+}
+
+export function calculateSubjectImpact(
+  semesters: Semester[],
+  semIdx: number
+): { impacts: SubjectImpact[]; sgpaDelta: number; cgpaDelta: number; baseline: number; isFirstSemester: boolean } {
+  const sorted = [...semesters].sort((a, b) => a.semesterNumber - b.semesterNumber);
+  const current = sorted[semIdx];
+
+  if (!current) return { impacts: [], sgpaDelta: 0, cgpaDelta: 0, baseline: 0, isFirstSemester: true };
+
+  const isFirstSemester = semIdx === 0;
+  const baseline = isFirstSemester
+    ? sorted.reduce((acc, s) => acc + s.sgpa, 0) / sorted.length // avg across all semesters
+    : sorted[semIdx - 1].sgpa;
+
+  const totalCredits = current.subjects.reduce((acc, s) => acc + s.credits, 0);
+
+  const impacts: SubjectImpact[] = current.subjects.map((s) => ({
+    subjectName: s.name,
+    code: s.code,
+    grade: s.grade,
+    gradePoint: s.gradePoint,
+    credits: s.credits,
+    impact: totalCredits > 0 ? ((s.gradePoint - baseline) * s.credits) / totalCredits : 0,
+  }));
+
+  impacts.sort((a, b) => a.impact - b.impact); // worst first
+
+  const prev = isFirstSemester ? null : sorted[semIdx - 1];
+  const sgpaDelta = prev ? current.sgpa - prev.sgpa : 0;
+  const cgpaDelta = prev ? current.cgpaAfterSemester - prev.cgpaAfterSemester : 0;
+
+  return { impacts, sgpaDelta, cgpaDelta, baseline, isFirstSemester };
 }
 
 export function buildComparisonData(students: Student[], metrics: string[]) {

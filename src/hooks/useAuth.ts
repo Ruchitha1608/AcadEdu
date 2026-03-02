@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
 import { AuthSession } from '@/types/student';
-import { login, logout, getCurrentSession, initDefaultUser } from '@/lib/auth';
+import { login, logout, getCurrentSession, initDefaultUser, register } from '@/lib/auth';
 
 export function useAuth() {
   const [session, setSession] = useState<AuthSession | null>(null);
@@ -28,5 +28,14 @@ export function useAuth() {
     setSession(null);
   }, []);
 
-  return { session, loading, signIn, signOut, isAuthenticated: !!session };
+  const signUp = useCallback(async (username: string, password: string, displayName: string) => {
+    const result = await register(username, password, displayName);
+    if (result.success) {
+      const loginResult = await login(username, password);
+      if (loginResult.success) setSession(getCurrentSession());
+    }
+    return result;
+  }, []);
+
+  return { session, loading, signIn, signOut, signUp, isAuthenticated: !!session };
 }

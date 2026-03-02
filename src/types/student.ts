@@ -72,6 +72,15 @@ export interface Student {
   updatedAt: string;
 }
 
+export interface SubjectImpact {
+  subjectName: string;
+  code: string;
+  grade: LetterGrade;
+  gradePoint: number;
+  credits: number;
+  impact: number; // positive = boosted SGPA, negative = dragged SGPA
+}
+
 export interface AppUser {
   id: string;
   username: string;
